@@ -1,0 +1,209 @@
+/* Estructura de Pantalla Dividida */
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Panel Izquierdo: Imagen */
+.left-panel {
+  flex: 1;
+  background-image: url('../../../assets/images/prosalon.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Importante para el filtro ::before */
+}
+
+.left-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 47, 86, 0.2);
+  pointer-events: none;
+}
+
+/* Panel Derecho: Fondo integrado */
+.right-panel {
+  flex: 1;
+  background-color: #edf4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- Login Card Integrada (Sin bordes, sin padding extra) --- */
+.login-card {
+  width: 100%;
+  /* Reducimos de 440px a 350px para que sea más estilizado */
+  max-width: 350px;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  padding: 1rem;
+  /* Centrado extra por si el contenedor es muy grande */
+  margin: 0 auto;
+}
+
+.login-title {
+  font-family: 'Alexandria', sans-serif;
+  font-size: 1.6rem; /* Bajamos un poco el tamaño para que sea proporcional al ancho */
+  font-weight: 700;
+  color: #1D2129;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+.form-group {
+  margin-bottom: 2.2rem;
+  position: relative;
+}
+
+.input-relative {
+  position: relative;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #444;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+/* Ajuste sutil en los inputs para el nuevo ancho */
+.input-field {
+  width: 100%;
+  padding: 12px 20px; /* Reducimos un poco el padding interno */
+  border-radius: 50px;
+  background-color: #ffffff;
+  font-size: 0.9rem; /* Fuente ligeramente más pequeña para que no se vea apretado */
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.input-field.valid-border { border: 1px solid #0ABC0B; }
+.input-field.invalid-border { border: 1px solid #A60000; }
+
+.status-text {
+  position: absolute;
+  left: 15px;
+  bottom: -18px;
+  font-size: 0.7rem; /* Reducimos un poco para que no se corte el texto */
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: normal; /* Permitimos que el texto salte de línea si es muy largo */
+  line-height: 1;
+}
+
+.status-text.valid { color: #0ABC0B; }
+.status-text.error { color: #A60000; }
+
+.forgot-password {
+  display: inline-block;
+  color: #1056BD;
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #002F56;
+  color: #ffffff;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  margin-top: 0.5rem;
+}
+
+/* Hover solo cuando NO tiene la clase .disabled ni el atributo disabled */
+.login-btn:not(.disabled):not(:disabled):hover {
+  background-color: #003769;
+  transform: translateY(-1px);
+}
+
+/* Estilos visuales para el estado 'deshabilitado' cuando usamos la clase .disabled
+   No usamos pointer-events:none para evitar problemas de focus/blur que causan
+   dobles clics; la validación sigue controlándose en el método login(). */
+.login-btn.disabled {
+  background-color: #ccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mantener también la regla para el atributo disabled por compatibilidad */
+.login-btn:disabled {
+  background-color: #ccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Iconos */
+.check-icon::before { content: "✔"; border: 1px solid #0ABC0B; border-radius: 50%; width: 12px; height: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; font-style: normal; }
+.error-icon::before { content: "!"; border: 1px solid #A60000; border-radius: 50%; width: 12px; height: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; font-style: normal; }
+
+/* Fondo semi-transparente */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal central */
+.modal-card {
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 320px;
+  max-width: 90%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Estilos según tipo */
+.modal-card.success {
+  border-left: 5px solid #0ABC0B;
+}
+
+.modal-card.error {
+  border-left: 5px solid #A60000;
+}
+
+/* Botón cerrar */
+.modal-card button {
+  margin-top: 1rem;
+  padding: 8px 16px;
+  border: none;
+  background-color: #002F56;
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.modal-card button:hover {
+  background-color: #003769;
+}
