@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-users',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
-export class Users {
+export class UsersComponent {
+  isDrawerOpen = false;
 
+  openDrawer() {
+    this.isDrawerOpen = true;
+  }
+
+  closeDrawer() {
+    this.isDrawerOpen = false;
+  }
 }

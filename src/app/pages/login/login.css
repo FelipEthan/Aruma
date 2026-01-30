@@ -1,209 +1,212 @@
-/* Estructura de Pantalla Dividida */
+/* ========= CONTENEDOR ========= */
 .main-container {
   display: flex;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  font-family: 'Inter', 'Raleway', sans-serif;
 }
 
-/* Panel Izquierdo: Imagen */
+/* ========= PANEL IZQUIERDO ========= */
 .left-panel {
   flex: 1;
   background-image: url('../../../assets/images/prosalon.jpeg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Importante para el filtro ::before */
+  position: relative;
 }
 
-.left-panel::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 47, 86, 0.2);
-  pointer-events: none;
-}
 
-/* Panel Derecho: Fondo integrado */
+
+/* ========= PANEL DERECHO ========= */
 .right-panel {
   flex: 1;
-  background-color: #edf4f9;
+  background-color: #f5f6f8;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* --- Login Card Integrada (Sin bordes, sin padding extra) --- */
+/* ========= LOGIN CARD ========= */
 .login-card {
   width: 100%;
-  /* Reducimos de 440px a 350px para que sea más estilizado */
-  max-width: 350px;
-  background-color: transparent;
-  box-shadow: none;
-  border: none;
-  font-family: 'Raleway', sans-serif;
+  max-width: 360px;
+  background: transparent;
   padding: 1rem;
-  /* Centrado extra por si el contenedor es muy grande */
-  margin: 0 auto;
 }
 
+/* ========= TITULOS ========= */
 .login-title {
-  font-family: 'Alexandria', sans-serif;
-  font-size: 1.6rem; /* Bajamos un poco el tamaño para que sea proporcional al ancho */
-  font-weight: 700;
-  color: #1D2129;
-  margin-bottom: 2rem;
-  text-align: left;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #FE0182;
+  margin-bottom: 0.25rem;
+
 }
-.form-group {
+
+.login-subtitle {
+  color: #6b7280;
   margin-bottom: 2.2rem;
-  position: relative;
+  font-size: 0.95rem;
+}
+
+/* ========= FORM ========= */
+.form-group {
+  margin-top: 30px;
+  margin-bottom: 2.1rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-left: 0.6rem;
+  color: #374151;
 }
 
 .input-relative {
   position: relative;
-  width: 100%;
 }
 
-label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: #444;
-  font-size: 0.9rem;
-  margin-left: 0.5rem;
-}
-
-/* Ajuste sutil en los inputs para el nuevo ancho */
 .input-field {
   width: 100%;
-  padding: 12px 20px; /* Reducimos un poco el padding interno */
+  padding: 12px 20px;
   border-radius: 50px;
-  background-color: #ffffff;
-  font-size: 0.9rem; /* Fuente ligeramente más pequeña para que no se vea apretado */
-  color: #333;
-  outline: none;
-  box-sizing: border-box;
-  font-family: 'Raleway', sans-serif;
-  border: 1px solid transparent;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  background: white;
   transition: all 0.2s ease;
 }
 
-.input-field.valid-border { border: 1px solid #0ABC0B; }
-.input-field.invalid-border { border: 1px solid #A60000; }
+.input-field:focus {
+  outline: none;
+  border-color: #FE0182;
+  box-shadow: 0 0 0 2px rgba(176, 18, 87, 0.25);
+}
+
+/* ========= VALIDACIONES ========= */
+.valid-border {
+  border-color: #16a34a;
+}
+
+.invalid-border {
+  border-color: #dc2626;
+}
 
 .status-text {
   position: absolute;
-  left: 15px;
+  left: 18px;
   bottom: -18px;
-  font-size: 0.7rem; /* Reducimos un poco para que no se corte el texto */
-  font-style: italic;
+  font-size: 0.7rem;
   display: flex;
   align-items: center;
-  gap: 5px;
-  white-space: normal; /* Permitimos que el texto salte de línea si es muy largo */
-  line-height: 1;
+  gap: 6px;
 }
 
-.status-text.valid { color: #0ABC0B; }
-.status-text.error { color: #A60000; }
+.status-text.valid { color: #16a34a; }
+.status-text.error { color: #dc2626; }
 
+/* ========= LINKS ========= */
 .forgot-password {
-  display: inline-block;
-  color: #1056BD;
-  text-decoration: none;
+  display: block;
+  text-align: right;
+  color: #b01257;
   font-size: 0.85rem;
-  margin-bottom: 1.5rem;
-  margin-left: 0.5rem;
+  margin-bottom: 1.6rem;
+  text-decoration: none;
 }
 
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* ========= BOTÓN ========= */
 .login-btn {
   width: 100%;
   padding: 12px;
-  background-color: #002F56;
-  color: #ffffff;
   border-radius: 50px;
-  font-size: 0.95rem;
+  background-color: #b01257;
+  color: white;
   font-weight: 700;
-  cursor: pointer;
   border: none;
-  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Hover solo cuando NO tiene la clase .disabled ni el atributo disabled */
-.login-btn:not(.disabled):not(:disabled):hover {
-  background-color: #003769;
+.login-btn:hover:not(.disabled) {
+  background-color: #8e0e46;
   transform: translateY(-1px);
 }
 
-/* Estilos visuales para el estado 'deshabilitado' cuando usamos la clase .disabled
-   No usamos pointer-events:none para evitar problemas de focus/blur que causan
-   dobles clics; la validación sigue controlándose en el método login(). */
-.login-btn.disabled {
-  background-color: #ccc;
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Mantener también la regla para el atributo disabled por compatibilidad */
+.login-btn.disabled,
 .login-btn:disabled {
-  background-color: #ccc;
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-/* Iconos */
-.check-icon::before { content: "✔"; border: 1px solid #0ABC0B; border-radius: 50%; width: 12px; height: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 8px; font-style: normal; }
-.error-icon::before { content: "!"; border: 1px solid #A60000; border-radius: 50%; width: 12px; height: 12px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; font-style: normal; }
+/* ========= ICONOS ========= */
+.check-icon::before {
+  content: "✔";
+  border: 1px solid #16a34a;
+  color: #16a34a;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
 
-/* Fondo semi-transparente */
+.error-icon::before {
+  content: "!";
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+/* ========= MODAL ========= */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
+  inset: 0;
+  background: rgba(0,0,0,0.45);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 999;
+  justify-content: center;
 }
 
-/* Modal central */
 .modal-card {
-  background: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 8px;
-  text-align: center;
+  background: white;
+  padding: 1.6rem 2rem;
+  border-radius: 10px;
   width: 320px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* Estilos según tipo */
 .modal-card.success {
-  border-left: 5px solid #0ABC0B;
+  border-top: 5px solid #b01257;
 }
 
 .modal-card.error {
-  border-left: 5px solid #A60000;
+  border-top: 5px solid #dc2626;
 }
 
-/* Botón cerrar */
 .modal-card button {
   margin-top: 1rem;
-  padding: 8px 16px;
-  border: none;
-  background-color: #002F56;
+  background: #b01257;
   color: white;
+  border: none;
+  padding: 8px 18px;
   border-radius: 50px;
   cursor: pointer;
 }
 
 .modal-card button:hover {
-  background-color: #003769;
+  background: #8e0e46;
 }

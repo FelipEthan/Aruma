@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #B01257;
+  --color-primary-dark: #8E0E46;
+  --color-primary-light: #E9A2C3;
+
+  --color-bg: #F5F6F8;
+  --color-card: #FFFFFF;
+
+  --color-text: #1F2937;
+  --color-text-muted: #6B7280;
+  --color-border: #E5E7EB;
+
+  --color-success: #16A34A;
+  --color-error: #DC2626;
+
+  --radius: 10px;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+
+  --font-main: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}

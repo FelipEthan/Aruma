@@ -5,8 +5,8 @@
     <div class="login-card">
       <h1 class="login-title">Inicio de sesión</h1>
 
-      <!-- ⚡ Formulario: evitamos submit nativo -->
       <form [formGroup]="loginForm" class="login-form">
+
         <!-- Usuario -->
         <div class="form-group">
           <label for="username">Usuario</label>
@@ -20,11 +20,13 @@
               [class.valid-border]="loginForm.get('username')?.valid && loginForm.get('username')?.value"
               [class.invalid-border]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
             />
-            <span *ngIf="loginForm.get('username')?.valid && loginForm.get('username')?.value" class="status-text valid">
-              <i class="check-icon"></i> Campo válido.
+            <span *ngIf="loginForm.get('username')?.valid && loginForm.get('username')?.value"
+                  class="status-text valid">
+              <i class="check-icon"></i> Campo válido
             </span>
-            <span *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="status-text error">
-              <i class="error-icon"></i> El usuario es requerido (mín. 7 caracteres).
+            <span *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                  class="status-text error">
+              <i class="error-icon"></i> El usuario es requerido
             </span>
           </div>
         </div>
@@ -42,24 +44,23 @@
               [class.valid-border]="loginForm.get('password')?.valid && loginForm.get('password')?.value"
               [class.invalid-border]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
             />
-            <span *ngIf="loginForm.get('password')?.valid && loginForm.get('password')?.value" class="status-text valid">
-              <i class="check-icon"></i> Campo válido.
+            <span *ngIf="loginForm.get('password')?.valid && loginForm.get('password')?.value"
+                  class="status-text valid">
+              <i class="check-icon"></i> Campo válido
             </span>
-            <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="status-text error">
-              <i class="error-icon"></i> No puede estar vacío.
+            <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                  class="status-text error">
+              <i class="error-icon"></i> No puede estar vacío
             </span>
           </div>
         </div>
 
-        <a href="#" class="forgot-password">Olvido Contraseña</a>
+        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
-        <!-- ⚡ Botón controlado -->
         <button type="button"
                 class="login-btn"
                 [class.disabled]="loginForm.invalid"
                 [disabled]="loginForm.invalid"
-                [attr.aria-disabled]="loginForm.invalid"
-                [attr.tabindex]="loginForm.invalid ? -1 : 0"
                 (click)="login()">
           Ingresar
         </button>
@@ -67,7 +68,7 @@
     </div>
   </div>
 
-  <!-- MODAL DE MENSAJE -->
+  <!-- MODAL -->
   <div class="modal-overlay" *ngIf="showModal">
     <div class="modal-card" [ngClass]="modalType">
       <p>{{ modalMessage }}</p>

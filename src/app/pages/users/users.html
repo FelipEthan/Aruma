@@ -1,1 +1,122 @@
-<p>users works!</p>
+<section class="users-container">
+  <h2 class="page-title">Administrar usuarios</h2>
+
+  <!-- ACCIONES -->
+  <div class="users-actions">
+    <input
+      type="text"
+      placeholder="Buscar usuario..."
+      class="search-input"
+    />
+
+    <button class="btn-primary" (click)="openDrawer()">
+      + Crear usuario
+    </button>
+  </div>
+
+  <!-- TABLA -->
+  <div class="users-card">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Perfil</th>
+        <th>Número de documento</th>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Estado</th>
+        <th class="actions-col">Acción</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+        <td>Administrador</td>
+        <td>1313</td>
+        <td>Carlos</td>
+        <td>Calvache</td>
+        <td>
+          <span class="status active">Activo</span>
+        </td>
+        <td class="actions">
+          <button class="icon-btn edit" title="Editar">✏️</button>
+          <button class="icon-btn delete" title="Eliminar">🗑️</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- OVERLAY -->
+  <div
+    class="drawer-overlay"
+    *ngIf="isDrawerOpen"
+    (click)="closeDrawer()">
+  </div>
+
+  <!-- DRAWER DERECHO -->
+  <aside class="drawer" *ngIf="isDrawerOpen">
+    <div class="drawer-header">
+      <h3>Crear usuario</h3>
+      <p>Datos del usuario</p>
+    </div>
+
+    <form class="drawer-form">
+
+      <div class="form-group">
+        <label>Número de documento</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Apellidos</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Perfil</label>
+        <select>
+          <option value="">Seleccione perfil</option>
+          <option>Administrador</option>
+          <option>Operador</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Celular</label>
+        <input type="text" />
+      </div>
+
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" />
+      </div>
+
+      <div class="form-group">
+        <label>Estado</label>
+        <select disabled>
+          <option selected>Activo</option>
+          <option>Inactivo</option>
+        </select>
+      </div>
+
+      <div class="drawer-actions">
+        <button
+          type="button"
+          class="btn-secondary"
+          (click)="closeDrawer()">
+          Cancelar
+        </button>
+
+        <button type="submit" class="btn-primary">
+          Guardar
+        </button>
+      </div>
+
+    </form>
+  </aside>
+</section>

@@ -1,8 +1,25 @@
+/* ========= HEADER ========= */
 .header {
   height: 60px;
-  background: white;
-  border-bottom: 1px solid #ddd;
+  background: #ffffff;
+  border-bottom: 1px solid #e6e6e6;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Texto bienvenida */
+.welcome-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Zona derecha (preparada para crecer) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }

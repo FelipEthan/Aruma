@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule, NgOptimizedImage],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrls: ['./sidebar.css']
 })
 export class SidebarComponent {
 

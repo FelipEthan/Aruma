@@ -1,23 +1,59 @@
+/* ========= SIDEBAR ========= */
 .sidebar {
-  width: 240px;
-  background: #002f56;
+  width: 180px;
+  height: 100vh;
+  background: rgb(255, 255, 255);
   color: white;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
 }
+
+/* ========= HEADER ========= */
+.sidebar-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
 
 .logo {
-  margin-bottom: 30px;
+  max-width: 120px;   /* tamaño ideal para sidebar 180px */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-a {
+/* ========= NAV ========= */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* ========= ITEM ========= */
+.nav-item {
   display: block;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
   color: white;
   text-decoration: none;
-  padding: 10px;
-  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-a.active,
-a:hover {
-  background: #014a88;
+/* Hover */
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+/* Activo */
+.nav-item.active {
+  background: #FE0182;
+  font-weight: 700;
+  box-shadow: inset 4px 0 0 #FE0182;
 }

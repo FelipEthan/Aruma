@@ -20,7 +20,12 @@ export const routes: Routes = [
           import('./pages/home/home')
             .then(m => m.HomeComponent)
       },
-
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('./pages/users/users')
+            .then(m => m.UsersComponent)
+      },
       {
         path: '',
         redirectTo: 'home',
