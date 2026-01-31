@@ -1,89 +1,93 @@
-/* ========= CONTENEDOR ========= */
-.main-container {
+/* ===== FONDO ===== */
+.login-wrapper {
+  min-height: 100vh;
+  background-image:
+    linear-gradient(rgba(0, 30, 60, 0.85), rgba(0, 30, 60, 0.9)),
+    url('../../../assets/images/prosalon.jpeg');
+  background-size: cover;
+  background-position: center;
   display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
   font-family: 'Inter', 'Raleway', sans-serif;
 }
 
-/* ========= PANEL IZQUIERDO ========= */
-.left-panel {
-  flex: 1;
-  background-image: url('../../../assets/images/prosalon.jpeg');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-
-
-/* ========= PANEL DERECHO ========= */
-.right-panel {
-  flex: 1;
-  background-color: #f5f6f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ========= LOGIN CARD ========= */
+/* ===== CARD (MÁS ANCHA) ===== */
 .login-card {
   width: 100%;
-  max-width: 360px;
-  background: transparent;
-  padding: 1rem;
+  max-width: 540px; /* ⬅️ MÁS ANCHO */
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  overflow: hidden;
 }
 
-/* ========= TITULOS ========= */
-.login-title {
-  font-size: 2rem;
+/* Barra superior */
+.top-bar {
+  height: 6px;
+  background: linear-gradient(to right, #e6007e, #fdb913);
+}
+
+/* ===== CONTENIDO ===== */
+.login-content {
+  padding: 2.8rem 3.2rem; /* ⬅️ mejor aire */
+  text-align: center;
+}
+
+/* ===== LOGO / TITULOS ===== */
+.logo {
+  height: 20px;
+  margin-bottom: 0.8rem;
+}
+
+.title {
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #FE0182;
-  margin-bottom: 0.25rem;
-
+  color: #1f2937;
 }
 
-.login-subtitle {
+.subtitle {
+  font-size: 0.88rem;
   color: #6b7280;
-  margin-bottom: 2.2rem;
-  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
 }
 
-/* ========= FORM ========= */
+/* ===== FORM ===== */
 .form-group {
-  margin-top: 30px;
-  margin-bottom: 2.1rem;
+  text-align: left;
+  margin-bottom: 2rem;
 }
 
 label {
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-left: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
   color: #374151;
+  text-transform: uppercase;
 }
 
+/* ===== INPUT ===== */
 .input-relative {
   position: relative;
 }
 
 .input-field {
   width: 100%;
-  padding: 12px 20px;
-  border-radius: 50px;
+  margin-top: 6px;
+  padding: 10px 14px;     /* ⬅️ MENOS ALTURA */
+  border-radius: 8px;    /* ⬅️ más elegante */
   border: 1px solid #e5e7eb;
-  font-size: 0.9rem;
-  background: white;
+  background: #f8fafc;
+  font-size: 0.85rem;    /* ⬅️ más compacto */
   transition: all 0.2s ease;
 }
 
 .input-field:focus {
   outline: none;
-  border-color: #FE0182;
-  box-shadow: 0 0 0 2px rgba(176, 18, 87, 0.25);
+  border-color: #e6007e;
+  box-shadow: 0 0 0 2px rgba(230, 0, 126, 0.18);
 }
 
-/* ========= VALIDACIONES ========= */
+/* ===== VALIDACIONES ===== */
 .valid-border {
   border-color: #16a34a;
 }
@@ -94,67 +98,34 @@ label {
 
 .status-text {
   position: absolute;
-  left: 18px;
-  bottom: -18px;
-  font-size: 0.7rem;
+  left: 12px;
+  bottom: -16px;
+  font-size: 0.68rem;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.status-text.valid { color: #16a34a; }
-.status-text.error { color: #dc2626; }
-
-/* ========= LINKS ========= */
-.forgot-password {
-  display: block;
-  text-align: right;
-  color: #b01257;
-  font-size: 0.85rem;
-  margin-bottom: 1.6rem;
-  text-decoration: none;
+.status-text.valid {
+  color: #16a34a;
 }
 
-.forgot-password:hover {
-  text-decoration: underline;
+.status-text.error {
+  color: #dc2626;
 }
 
-/* ========= BOTÓN ========= */
-.login-btn {
-  width: 100%;
-  padding: 12px;
-  border-radius: 50px;
-  background-color: #b01257;
-  color: white;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.login-btn:hover:not(.disabled) {
-  background-color: #8e0e46;
-  transform: translateY(-1px);
-}
-
-.login-btn.disabled,
-.login-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* ========= ICONOS ========= */
+/* Íconos */
 .check-icon::before {
   content: "✔";
   border: 1px solid #16a34a;
   color: #16a34a;
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 8px;
+  font-size: 7px;
 }
 
 .error-icon::before {
@@ -162,15 +133,47 @@ label {
   border: 1px solid #dc2626;
   color: #dc2626;
   border-radius: 50%;
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 8px;
 }
 
-/* ========= MODAL ========= */
+/* ===== BOTÓN ===== */
+.login-btn {
+  width: 100%;
+  margin-top: 1.2rem;
+  padding: 12px;
+  border-radius: 10px;
+  background: #004578;
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.login-btn:hover:not(:disabled) {
+  background: #00335a;
+  transform: translateY(-1px);
+}
+
+.login-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== FOOTER ===== */
+.footer-text {
+  margin-top: 1.6rem;
+  font-size: 0.72rem;
+  color: #9ca3af;
+}
+
+/* ===== MODAL ===== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -190,7 +193,7 @@ label {
 }
 
 .modal-card.success {
-  border-top: 5px solid #b01257;
+  border-top: 5px solid #e6007e;
 }
 
 .modal-card.error {
@@ -199,7 +202,7 @@ label {
 
 .modal-card button {
   margin-top: 1rem;
-  background: #b01257;
+  background: #004578;
   color: white;
   border: none;
   padding: 8px 18px;
@@ -208,5 +211,5 @@ label {
 }
 
 .modal-card button:hover {
-  background: #8e0e46;
+  background: #00335a;
 }

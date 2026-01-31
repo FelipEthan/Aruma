@@ -122,12 +122,103 @@
   background: rgba(0, 0, 0, 0.35);
   z-index: 900;
 }
+/* ================= VALIDACIONES (IGUAL LOGIN) ================= */
+
+.drawer-form {
+  font-family: 'Inter', 'Raleway', sans-serif;
+}
+
+.drawer-form .form-group {
+  position: relative;
+}
+
+/* Inputs */
+.drawer-form input,
+.drawer-form select {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.drawer-form input:focus,
+.drawer-form select:focus {
+  outline: none;
+  border-color: #FE0182;
+  box-shadow: 0 0 0 2px rgba(176, 18, 87, 0.25);
+}
+.drawer,
+.drawer-overlay {
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+
+/* Bordes */
+.valid-border {
+  border-color: #16a34a !important;
+}
+
+.invalid-border {
+  border-color: #dc2626 !important;
+}
+
+/* Texto de validación */
+.status-text {
+  position: absolute;
+  left: 18px;
+  bottom: -18px;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+.status-text.valid {
+  color: #16a34a;
+}
+
+.status-text.error {
+  color: #dc2626;
+}
+
+/* Iconos */
+.check-icon::before {
+  content: "✔";
+  border: 1px solid #16a34a;
+  color: #16a34a;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+
+.error-icon::before {
+  content: "!";
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
 
 .drawer {
   position: fixed;
   top: 0;
   right: 0;
-  width: 420px;
+  width: 380px;
   height: 100vh;
   background: #ffffff;
   z-index: 1000;
@@ -164,7 +255,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 14px;
+  margin-bottom: 1.2rem;
 }
 
 label {
@@ -200,15 +291,25 @@ select:focus {
 .btn-secondary {
   background: transparent;
   border: 1px solid #ccc;
-  padding: 10px 18px;
-  border-radius: 20px;
+  padding: 8px 12px;
+  border-radius: 12px;
   cursor: pointer;
 }
 
 .btn-secondary:hover {
   background: #f5f5f5;
 }
-/* ================= FORM BASE ================= */
+/* ===== FORM GROUP BASE ===== */
+.drawer-form .form-group {
+  position: relative;
+  transition: margin-bottom 0.2s ease;
+}
+
+/* ===== CUANDO HAY ERROR ===== */
+.drawer-form .form-group:has(.status-text.error) {
+  margin-bottom: 1rem; /* 👈 espacio extra SOLO si hay error */
+}
+
 .drawer-form {
   display: flex;
   flex-direction: column;
@@ -268,4 +369,37 @@ select:focus {
   justify-content: flex-end;
   gap: 0.75rem;
   margin-top: 1rem;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 99999; /* 🔥 ABSOLUTAMENTE ARRIBA */
+  pointer-events: auto;
+}
+
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  min-width: 320px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.users-actions .search-group{
+  display:flex;
+  gap:8px;
+  align-items:center;
 }

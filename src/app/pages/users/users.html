@@ -1,21 +1,27 @@
 <section class="users-container">
   <h2 class="page-title">Administrar usuarios</h2>
 
-  <!-- ACCIONES -->
+  <!-- ================= ACCIONES ================= -->
   <div class="users-actions">
-    <input
-      type="text"
-      placeholder="Buscar usuario..."
-      class="search-input"
-    />
+    <div class="search-group">
+      <input
+        type="text"
+        placeholder="Buscar usuario..."
+        class="search-input"
+        [formControl]="searchControl"
+        (keydown.enter)="consultarDocumento($event)"
+      />
+      <button class="btn-secondary" type="button" (click)="consultarDocumento($event)" [disabled]="isSearching">Consultar</button>
+      <button class="btn-secondary" type="button" (click)="clearSearch()">Limpiar</button>
+    </div>
 
     <button class="btn-primary" (click)="openDrawer()">
       + Crear usuario
     </button>
   </div>
 
-  <!-- TABLA -->
-  <div class="users-card">
+  <!-- ================= TABLA ================= -->
+  <div *ngIf="hasQueried" class="users-card">
     <table class="users-table">
       <thead>
       <tr>
@@ -29,13 +35,15 @@
       </thead>
 
       <tbody>
-      <tr>
-        <td>Administrador</td>
-        <td>1313</td>
-        <td>Carlos</td>
-        <td>Calvache</td>
+      <tr *ngFor="let user of users">
+        <td>{{ user.profile }}</td>
+        <td>{{ user.document }}</td>
+        <td>{{ user.names }}</td>
+        <td>{{ user.lastNames }}</td>
         <td>
-          <span class="status active">Activo</span>
+            <span class="status" [ngClass]="{'active': user.status === 'Activo'}">
+              {{ user.status }}
+            </span>
         </td>
         <td class="actions">
           <button class="icon-btn edit" title="Editar">✏️</button>
@@ -46,77 +54,168 @@
     </table>
   </div>
 
-  <!-- OVERLAY -->
-  <div
-    class="drawer-overlay"
-    *ngIf="isDrawerOpen"
-    (click)="closeDrawer()">
-  </div>
+  <!-- ================= OVERLAY ================= -->
+  <div class="drawer-overlay" *ngIf="isDrawerOpen"></div>
 
-  <!-- DRAWER DERECHO -->
-  <aside class="drawer" *ngIf="isDrawerOpen">
+  <!-- ================= DRAWER DERECHO ================= -->
+  <aside class="drawer" *ngIf="isDrawerOpen && userForm">
+
     <div class="drawer-header">
       <h3>Crear usuario</h3>
       <p>Datos del usuario</p>
     </div>
 
-    <form class="drawer-form">
+    <form class="drawer-form" [formGroup]="userForm" (ngSubmit)="saveUser()">
 
+      <!-- DOCUMENTO -->
       <div class="form-group">
         <label>Número de documento</label>
-        <input type="text" />
+        <input
+          type="text"
+          formControlName="document"
+          [class.valid-border]="userForm.get('document')?.valid && userForm.get('document')?.value"
+          [class.invalid-border]="userForm.get('document')?.invalid && userForm.get('document')?.touched"
+        />
+        <span
+          *ngIf="userForm.get('document')?.invalid && userForm.get('document')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Solo números (máx. 12)
+        </span>
       </div>
 
+      <!-- NOMBRES -->
       <div class="form-group">
         <label>Nombres</label>
-        <input type="text" />
+        <input
+          type="text"
+          formControlName="names"
+          [class.valid-border]="userForm.get('names')?.valid && userForm.get('names')?.value"
+          [class.invalid-border]="userForm.get('names')?.invalid && userForm.get('names')?.touched"
+        />
+        <span
+          *ngIf="userForm.get('names')?.invalid && userForm.get('names')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Solo letras (máx. 20)
+        </span>
       </div>
 
+      <!-- APELLIDOS -->
       <div class="form-group">
         <label>Apellidos</label>
-        <input type="text" />
+        <input
+          type="text"
+          formControlName="lastNames"
+          [class.valid-border]="userForm.get('lastNames')?.valid && userForm.get('lastNames')?.value"
+          [class.invalid-border]="userForm.get('lastNames')?.invalid && userForm.get('lastNames')?.touched"
+        />
+        <span
+          *ngIf="userForm.get('lastNames')?.invalid && userForm.get('lastNames')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Solo letras (máx. 20)
+        </span>
       </div>
 
+      <!-- PERFIL -->
       <div class="form-group">
         <label>Perfil</label>
-        <select>
+        <select
+          formControlName="profile"
+          [class.valid-border]="userForm.get('profile')?.valid && userForm.get('profile')?.value"
+          [class.invalid-border]="userForm.get('profile')?.invalid && userForm.get('profile')?.touched">
           <option value="">Seleccione perfil</option>
-          <option>Administrador</option>
-          <option>Operador</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Operador">Operador</option>
         </select>
+
+        <span
+          *ngIf="userForm.get('profile')?.invalid && userForm.get('profile')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Seleccione un perfil
+        </span>
       </div>
 
+      <!-- CELULAR -->
       <div class="form-group">
         <label>Celular</label>
-        <input type="text" />
+        <input
+          type="text"
+          formControlName="phone"
+          [class.valid-border]="userForm.get('phone')?.valid && userForm.get('phone')?.value"
+          [class.invalid-border]="userForm.get('phone')?.invalid && userForm.get('phone')?.touched"
+        />
+        <span
+          *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Formato inválido (debe iniciar en 3)
+        </span>
       </div>
 
+      <!-- EMAIL -->
       <div class="form-group">
         <label>Correo electrónico</label>
-        <input type="email" />
+        <input
+          type="email"
+          formControlName="email"
+          [class.valid-border]="userForm.get('email')?.valid && userForm.get('email')?.value"
+          [class.invalid-border]="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+        />
+        <span
+          *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+          class="status-text error">
+          <i class="error-icon"></i> Formato de correo inválido
+        </span>
       </div>
 
+      <!-- ESTADO -->
       <div class="form-group">
         <label>Estado</label>
-        <select disabled>
-          <option selected>Activo</option>
-          <option>Inactivo</option>
+        <select formControlName="status">
+          <option value="Activo">Activo</option>
         </select>
       </div>
 
+      <!-- ACCIONES -->
       <div class="drawer-actions">
-        <button
-          type="button"
-          class="btn-secondary"
-          (click)="closeDrawer()">
+        <button type="button" class="btn-secondary" (click)="closeDrawer()">
           Cancelar
         </button>
 
-        <button type="submit" class="btn-primary">
+        <button type="submit" class="btn-primary" [disabled]="userForm.invalid">
           Guardar
         </button>
       </div>
 
     </form>
   </aside>
+
+  <!-- ================= MODALES ================= -->
+
+  <!-- Modal Confirmación -->
+  <div class="modal" *ngIf="showConfirmModal">
+    <div class="modal-content">
+      <p>¿Está seguro de crear el usuario?</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" (click)="cancelCreate()">No</button>
+        <button
+          type="button"
+          class="btn-primary"
+          (click)="confirmCreate()"
+          [disabled]="isCreatingUser">
+          Sí
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Éxito -->
+  <div class="modal success" *ngIf="showSuccessModal">
+    <div class="modal-content">
+      <p>Se ha creado el usuario exitosamente</p>
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" (click)="closeSuccessModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
 </section>

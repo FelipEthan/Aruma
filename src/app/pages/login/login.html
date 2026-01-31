@@ -1,70 +1,105 @@
-<div class="main-container">
-  <div class="left-panel"></div>
+<div class="login-wrapper">
 
-  <div class="right-panel">
+  <div class="login-container">
     <div class="login-card">
-      <h1 class="login-title">Inicio de sesión</h1>
 
-      <form [formGroup]="loginForm" class="login-form">
+      <!-- Barra superior -->
+      <div class="top-bar"></div>
 
-        <!-- Usuario -->
-        <div class="form-group">
-          <label for="username">Usuario</label>
-          <div class="input-relative">
-            <input
-              type="text"
-              id="username"
-              placeholder="Ingresa usuario"
-              formControlName="username"
-              class="input-field"
-              [class.valid-border]="loginForm.get('username')?.valid && loginForm.get('username')?.value"
-              [class.invalid-border]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
-            />
-            <span *ngIf="loginForm.get('username')?.valid && loginForm.get('username')?.value"
-                  class="status-text valid">
-              <i class="check-icon"></i> Campo válido
-            </span>
-            <span *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
-                  class="status-text error">
-              <i class="error-icon"></i> El usuario es requerido
-            </span>
+      <div class="login-content">
+
+        <!-- Logo -->
+        <img
+          src="../../../assets/images/headeraruma.jpeg"
+          alt="Aruma Logo"
+          class="logo"
+        />
+
+        <h2 class="title">Portal Corporativo</h2>
+        <p class="subtitle">Ingresa tus credenciales para continuar</p>
+
+        <form [formGroup]="loginForm" class="login-form">
+
+          <!-- USUARIO -->
+          <div class="form-group">
+            <label>Usuario</label>
+
+            <div class="input-relative">
+              <input
+                type="text"
+                placeholder="Usuario de red / Correo"
+                formControlName="username"
+                class="input-field"
+                [class.valid-border]="loginForm.get('username')?.valid && loginForm.get('username')?.value"
+                [class.invalid-border]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+              />
+
+              <!-- VALID -->
+              <span
+                *ngIf="loginForm.get('username')?.valid && loginForm.get('username')?.value"
+                class="status-text valid"
+              >
+                <i class="check-icon"></i> Campo válido
+              </span>
+
+              <!-- INVALID -->
+              <span
+                *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+                class="status-text error"
+              >
+                <i class="error-icon"></i> El usuario es requerido
+              </span>
+            </div>
           </div>
-        </div>
 
-        <!-- Contraseña -->
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <div class="input-relative">
-            <input
-              type="password"
-              id="password"
-              placeholder="Ingresa contraseña"
-              formControlName="password"
-              class="input-field"
-              [class.valid-border]="loginForm.get('password')?.valid && loginForm.get('password')?.value"
-              [class.invalid-border]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-            />
-            <span *ngIf="loginForm.get('password')?.valid && loginForm.get('password')?.value"
-                  class="status-text valid">
-              <i class="check-icon"></i> Campo válido
-            </span>
-            <span *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
-                  class="status-text error">
-              <i class="error-icon"></i> No puede estar vacío
-            </span>
+          <!-- CONTRASEÑA -->
+          <div class="form-group">
+            <label>Contraseña</label>
+
+            <div class="input-relative">
+              <input
+                type="password"
+                placeholder="••••••••"
+                formControlName="password"
+                class="input-field"
+                [class.valid-border]="loginForm.get('password')?.valid && loginForm.get('password')?.value"
+                [class.invalid-border]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              />
+
+              <!-- VALID -->
+              <span
+                *ngIf="loginForm.get('password')?.valid && loginForm.get('password')?.value"
+                class="status-text valid"
+              >
+                <i class="check-icon"></i> Campo válido
+              </span>
+
+              <!-- INVALID -->
+              <span
+                *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                class="status-text error"
+              >
+                <i class="error-icon"></i> No puede estar vacío
+              </span>
+            </div>
           </div>
-        </div>
 
-        <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+          <button
+            type="button"
+            class="login-btn"
+            [disabled]="loginForm.invalid"
+            (click)="login()"
+          >
+            Iniciar Sesión
+          </button>
 
-        <button type="button"
-                class="login-btn"
-                [class.disabled]="loginForm.invalid"
-                [disabled]="loginForm.invalid"
-                (click)="login()">
-          Ingresar
-        </button>
-      </form>
+        </form>
+
+        <p class="footer-text">
+          Acceso restringido a personal autorizado.
+        </p>
+
+      </div>
     </div>
   </div>
 
@@ -75,4 +110,5 @@
       <button (click)="closeModal()">Cerrar</button>
     </div>
   </div>
+
 </div>
